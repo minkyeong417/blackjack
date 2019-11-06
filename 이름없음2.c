@@ -16,6 +16,26 @@
 
 //card array controllers -----------------------------
 
+
+//mix the card sets and put in the array
+int mixCardTray(void) {
+	
+	printf("--> card is mixed and put into the tray");
+	
+	int x[52];
+	int i,j;
+	for(i=0;i<52;i++) {
+
+	do{
+	
+	x[i]=rand()%52;
+
+	}
+	while ();
+	}
+}
+
+
 }
 
 //get one card from the tray

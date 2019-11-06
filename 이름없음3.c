@@ -65,8 +65,20 @@ void offerCards(void) {
 	{
 		cardhold[i][0] = pullCard();
 		cardhold[i][1] = pullCard();
-		if (i==0)
-		printf("you:");
+		
+		if (i==0) {
+			printf("you:");
+			printCard(cardhold[0][0]);
+			printCard(cardhold[0][1]);
+			printf("\n");
+		}
+		
+		else {
+			printf("player%d:",i);
+			printCard(cardhold[i][0]);
+			printCard(cardhold[i][1]);
+			printf("\n");
+		}	
 	}
 	//2. give two card for the operator
 	cardhold[n_user][0] = pullCard();

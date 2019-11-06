@@ -68,8 +68,7 @@ int main(int argc, char *argv[]) {
 	//Game initialization --------
 	//1. players' dollar
 	
-	printf("--> card is mixed and put into the tray");
-
+	mixCardTray();
 
 
 

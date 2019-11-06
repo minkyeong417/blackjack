@@ -25,10 +25,11 @@ void printCard(int cardnum) {
 	if (cardnum>=1&&cardnum<=13)
 		printf("DIA%d",cardnum);
 	else if (cardnum>=14&&cardnum<=26)
-		printf("HRT%d",cardnum)
+		printf("HRT%d",cardnum-13);
 	else if (cardnum>=27&&cardnum<=39)
+		printf("SPD%d",cardnum-26);
 	else if (cardnum>=40&&cardnum<=52)	
-	
+		printf("CLV%d",cardnum-39);
 }
 
 
