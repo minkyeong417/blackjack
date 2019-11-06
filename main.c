@@ -88,7 +88,8 @@ int main(int argc, char *argv[]) {
 		//each player's turn
 		for (i=0;i<n_users;i++) //each player
 		{	
-			while (cardSum<21) //do until the player dies or player says stop
+			cardSum[i]=
+			while (cardSum[i]<21) //do until the player dies or player says stop
 			{	if (i==0)
 					printf("my turn\n");
 			
