@@ -89,7 +89,11 @@ void offerCards(void) {
 
 
 
-int getAction(void) { //go나 stop 여부결정 
+void doAction(void) { 
+	if (action==0)//to go	
+		cardhold[i][]=pullCard();
+	
+	
 	
 }
 

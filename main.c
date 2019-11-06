@@ -33,6 +33,7 @@ int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];	//cards that currently the players h
 int cardSum[N_MAX_USER];					//sum of the cards
 int bet[N_MAX_USER];						//current betting 
 int gameEnd = 0; 							//game end flag
+int action;
 
 //some utility functions
 
@@ -83,11 +84,22 @@ int main(int argc, char *argv[]) {
 		
 		printf("\n------------------ GAME start --------------------------\n");
 		
+		int i;
 		//each player's turn
-		for () //each player
-		{
-			while () //do until the player dies or player says stop
-			{
+		for (i=0;i<n_users;i++) //each player
+		{	
+			while (cardSum<21) //do until the player dies or player says stop
+			{	if (i==0)
+					printf("my turn\n");
+			
+				else 
+					printf("player %d turn",i);
+				
+				printf("card:");
+				printCard(cardhold[i][]);
+				printf(" To go: press 0, To stay: press 1");
+				scanf("%d",action);
+				doAction();
 				//print current card status printUserCardStatus();
 				//check the card status ::: calcStepResult()
 				//GO? STOP? ::: getAction()

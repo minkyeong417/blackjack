@@ -22,16 +22,19 @@ int mixCardTray(void) {
 	
 	printf("--> card is mixed and put into the tray");
 	
-	int x[52];
 	int i,j;
-	for(i=0;i<52;i++) {
+	for(i=0;i<N_CARDSET*N_CARD;i++) { //각 배열요소에 대해서 
 
-	do{
+		do {
 	
-	x[i]=rand()%52;
+		CardTray[i]=rand()%(N_CARDSET*N_CARD);
+	
+		int plex=1;
+		for(j=0;j<i;j++)
+		plex*=(CardTray[i]-CardTray[j]);
 
-	}
-	while ();
+		}
+		while (plex==0);
 	}
 }
 
@@ -40,8 +43,7 @@ int mixCardTray(void) {
 
 //get one card from the tray
 int pullCard(void) {
-	int i;
-	i=1+rand()%52;
-	return i;
+	return CardTray[cardIndex];
+	cardIndex++;
 }
 

@@ -17,19 +17,32 @@
 
 //calculate the actual card number in the blackjack game
 int getCardNum(int cardnum) {
+	int num;
+	num=cardnum%13;
+	
+	if (num<10)
+		return num;
+	else
+		return 10;
 	
 }
 
 //print the card information (e.g. DiaA)
 void printCard(int cardnum) {
-	if (cardnum>=1&&cardnum<=13)
-		printf("DIA%d",cardnum);
-	else if (cardnum>=14&&cardnum<=26)
-		printf("HRT%d",cardnum-13);
-	else if (cardnum>=27&&cardnum<=39)
-		printf("SPD%d",cardnum-26);
-	else if (cardnum>=40&&cardnum<=52)	
-		printf("CLV%d",cardnum-39);
+	int num;
+	num=cardnum%52;
+	
+	if (num>=0&&num<=12)
+		printf("DIA%d",num+1);
+	
+	else if (num>=13&&num<=25)
+		printf("HRT%d",num-12);
+	
+	else if (num>=26&&num<=38)
+		printf("SPD%d",num-25);
+	
+	else if (num>=39&&num<=51)	
+		printf("CLV%d",num-38);
 }
 
 
