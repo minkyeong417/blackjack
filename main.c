@@ -19,37 +19,20 @@
 //card tray object
 //형상관리에 몇번 올리기 
 //card tray object
-int CardTray[N_CARDSET*N_CARD];
-int cardIndex = 0;							
+int CardTray[N_CARDSET*N_CARD]; //1차원 배열 
+int cardIndex = 0;		//tray속 n번째 카드					
 
 
 //player info
-int dollar[N_MAX_USER]={50,50,50,50,50};						//dollars that each player has
-int n_user;									//number of users
+int dollar[N_MAX_USER]={50,50,50,50,50};						//달러 보유 현황 
+int n_user;									//유저 명수 
 
 
 //play yard information
-int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];	//cards that currently the players hold
-int cardSum[N_MAX_USER];					//sum of the cards
-int bet[N_MAX_USER];						//current betting 
+int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];	//현재 카드 보유현황 2차원배열 
+int cardSum[N_MAX_USER];					//round별 cardsum. max크기의 1차원배열 
+int bet[N_MAX_USER];						//round별 betting 한 금액 
 int gameEnd = 0; 							//game end flag
-int action;
-
-//some utility functions
-
-//get an integer input from standard input (keyboard)
-//return : input integer value
-//         (-1 is returned if keyboard input was not integer)
-int getIntegerInput(void) {
-    int input, num;
-    
-    num = scanf("%d", &input);
-    fflush(stdin);
-    if (num != 1) //if it fails to get integer
-        input = -1;
-    
-    return input;
-}
 
 /////////////////////////main///////////////////////////
 
@@ -57,38 +40,38 @@ int getIntegerInput(void) {
 
 int main(int argc, char *argv[]) {
 	int roundIndex = 0;
-	int max_user;
 	int i;
 	
 	srand((unsigned)time(NULL));
 	
-	//set the number of players
-	configUser();
-
-
-	//Game initialization --------
-	//1. players' dollar
 	
-	mixCardTray();
+	configUser();//플레이어 세트 
+
+
+	mixCardTray();//카드 믹스 
 
 
 
 	//Game start --------
-	do {
+	do {//라운드 진행 
+		//각 라운드마다~ 
+		betDollar();//나의 베팅 입력 
 		
-		betDollar();
+		presentdollar();//플레이어들의 베팅 출력 
 		
-		presentdollar();
-		
-		offerCards(); 
+		offerCards(); //카드 나눠주기 & 카드 현황 출력 (딜러는 2번째 카드만) 
 		
 		printf("\n------------------ GAME start --------------------------\n");
 		
+	
+		
+		//player 마다 turn 시작 
+		
 		int i;
-		//each player's turn
-		for (i=0;i<n_users;i++) //each player
+		
+		for (i=0;i<n_users;i++) //each player 플레이어 마다 
 		{	
-			cardSum[i]=
+			cardSum[i]= //A는 1이나 11, jqk는 10 
 			while (cardSum[i]<21) //do until the player dies or player says stop
 			{	if (i==0)
 					printf("my turn\n");
@@ -110,7 +93,7 @@ int main(int argc, char *argv[]) {
 		
 		//result
 		checkResult();
-	} while (gameEnd == 0);
+	} while (gameEnd == 0);//게임끝날때 까 지 
 	
 	checkWinner();//승자출력 
 	

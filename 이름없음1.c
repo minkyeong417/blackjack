@@ -1,3 +1,5 @@
+// !!전역변수 호출하 기 
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -13,6 +15,9 @@
 #define N_MAX_BET			5
 
 #define N_MIN_ENDCARD		30
+
+
+
 //card processing functions ---------------
 
 //calculate the actual card number in the blackjack game
