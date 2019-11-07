@@ -32,22 +32,6 @@ int getCardNum(int cardnum) {
 	
 }
 
-//print the card information (e.g. DiaA)
-void printCard(int cardnum) {
-	int num;
-	num=cardnum%52;
-	
-	if (num>=0&&num<=12)
-		printf("DIA%d",num+1);
-	
-	else if (num>=13&&num<=25)
-		printf("HRT%d",num-12);
-	
-	else if (num>=26&&num<=38)
-		printf("SPD%d",num-25);
-	
-	else if (num>=39&&num<=51)	
-		printf("CLV%d",num-38);
 }
 
 

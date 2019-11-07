@@ -44,7 +44,6 @@ int main(int argc, char *argv[]) {
 	
 	srand((unsigned)time(NULL));
 	
-	
 	configUser();//플레이어 세트 
 
 
@@ -54,16 +53,15 @@ int main(int argc, char *argv[]) {
 
 	//Game start --------
 	do {//라운드 진행 
-		//각 라운드마다~ 
-		betDollar();//나의 베팅 입력 
+		printf("Round %d\n",roundIndex+1);//각 라운드마다~ 
 		
-		presentdollar();//플레이어들의 베팅 출력 
+		roundIndex++;
+		
+		betDollar();//나의 베팅 입력 
 		
 		offerCards(); //카드 나눠주기 & 카드 현황 출력 (딜러는 2번째 카드만) 
 		
 		printf("\n------------------ GAME start --------------------------\n");
-		
-	
 		
 		//player 마다 turn 시작 
 		
