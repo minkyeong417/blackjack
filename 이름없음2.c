@@ -18,10 +18,10 @@
 
 //card array controllers -----------------------------
 
+extern int CardTray[N_CARDSET*N_CARD]; //1차원 배열 
+extern int cardIndex = 0;		//tray속 n번째 카드	
 
 
-
-}
 
 //get one card from the tray
 int pullCard(void) {

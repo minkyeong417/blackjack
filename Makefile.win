@@ -1,0 +1,49 @@
+# Project: Project1
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = 이름없음1.o 이름없음2.o beforeTurn.o main.o 이름없음4.o actionInput.o beforeRound.o forEachTurn.o 이름없음4.o 이름없음5.o
+LINKOBJ  = 이름없음1.o 이름없음2.o beforeTurn.o main.o 이름없음4.o actionInput.o beforeRound.o forEachTurn.o 이름없음4.o 이름없음5.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = Project1.exe
+CXXFLAGS = $(CXXINCS) -g3
+CFLAGS   = $(INCS) -g3
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+이름없음1.o: 이름없음1.c
+	$(CC) -c 이름없음1.c -o 이름없음1.o $(CFLAGS)
+
+이름없음2.o: 이름없음2.c
+	$(CC) -c 이름없음2.c -o 이름없음2.o $(CFLAGS)
+
+beforeTurn.o: beforeTurn.c
+	$(CC) -c beforeTurn.c -o beforeTurn.o $(CFLAGS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+이름없음4.o: 이름없음4.c
+	$(CC) -c 이름없음4.c -o 이름없음4.o $(CFLAGS)
+
+actionInput.o: actionInput.c
+	$(CC) -c actionInput.c -o actionInput.o $(CFLAGS)
+
+beforeRound.o: beforeRound.c
+	$(CC) -c beforeRound.c -o beforeRound.o $(CFLAGS)
+
+forEachTurn.o: forEachTurn.c
+	$(CC) -c forEachTurn.c -o forEachTurn.o $(CFLAGS)
