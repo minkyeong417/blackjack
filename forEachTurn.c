@@ -35,7 +35,7 @@ void printUserCardStatus(int user, int cardcnt) {
 	
 	printf("   -> card : ");
 	
-	for (i=0;i<cardcnt;i++)
+	for (i=0;i<cardcnt+1;i++)
 		printCard(cardhold[user][i]);
 	printf(" ::: ");
 }

@@ -23,7 +23,7 @@ extern int cardIndex = 0;		//tray속 n번째 카드
 
 
 
-//get one card from the tray
+//get one card from the tray(0~51)
 int pullCard(void) {
 	return CardTray[cardIndex]%52;
 	cardIndex++;

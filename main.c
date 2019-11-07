@@ -70,26 +70,55 @@ int main(int argc, char *argv[]) {
 		{
 			if (i==0)
 				printf("my turn\n");
-			else 
+			else if (i==n_user)
+				printf("server turn\n");
+			else
 				printf("player %d turn\n",i);
 				
 			calculateCardSum();
 			
-			while (cardSum[i]<21) //do until the player dies or player says stop
-			{	
+			int cardcnt=1;
+			
+			switch (i)
+			
+			case 0:{
 				
-				int cardcnt=2;
+				if (cardSum>21)
 				
-				int action;
 				
-				printUserCardStatus(i,cardcnt);
+				while (cardSum[i]<21){ //do until the player dies or player says stop
+					int action;
 				
-				printf(" To go: press 0, To stay: press 1 --->");
+					printUserCardStatus(i,cardcnt);
+				
+					printf(" To go: press 0, To stay: press 1 --->");
 	
-				scanf("%d",&action);
+					scanf("%d",&action);
 	
-				if (action==0)//to go	
-				cardhold[i][]=pullCard();
+					if (action==0){//to go	
+						cardcnt++;
+						cardhold[i][cardcnt]=pullCard();
+					}
+				
+					else 
+						break;
+				}
+				break;
+			}
+			
+			default {
+				while (cardSum[i]<21){ //do until the player dies or player says stop
+					printUserCardStatus(i,cardcnt);
+					
+					if (cardSum[i]>=17)//to stop
+						printf("stay\n");
+						break;
+					else
+						cardcnt++;
+						printf("go\n");
+				}
+				
+				break;
 			}
 		}
 		
