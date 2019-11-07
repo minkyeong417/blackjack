@@ -94,3 +94,24 @@ void printCard(int cardnum) {
 		printf("CLVKing");
 	}
 }
+
+//calculate the actual card number in the blackjack game
+void calculateCardSum(){
+
+	for (i=0;i<n_user+1;i++){
+		for (j=0;j<=N_MAX_CARDHOLD;j++)
+		cardSum[i]+=getCardNum([i][j]);
+		
+
+int getCardNum(int cardnum) {
+	
+	int num;
+	
+	num=cardnum%13;
+	
+	if (num<10)
+		return num;
+	else
+		return 10;
+	}
+

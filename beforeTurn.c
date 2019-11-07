@@ -18,6 +18,8 @@
 extern int dollar[N_MAX_USER]={50,50,50,50,50};
 extern int bet[N_MAX_USER];
 extern int n_user;	
+extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];
+extern int cardSum[N_MAX_USER];
 //playing game functions -----------------------------
 
 
@@ -48,12 +50,14 @@ void offerCards(void) {
 	
 	//1. give two cards
 	
-	int i;
+	int i,j;
 	
-	for (i=0;i<n_user+1;i++){
-		cardhold[i][0] = pullCard();
-		cardhold[i][1] = pullCard();
+	for (j=0;j<2;j++){
+		for (i=0;i<n_user+1;i++)
+		cardhold[i][j] = pullCard();
 	}
+	
+	//2. print card state
 	
 	printf("server:X ");
 	printCard(cardhold[n_user][1]);
@@ -71,14 +75,6 @@ void offerCards(void) {
 		printCard(cardhold[i][1]);
 		printf("\n");
 	}
-	
-		}	
-	}
-	//2. print card state
-	cardhold[n_user][0] = pullCard();
-	cardhold[n_user][1] = pullCard();
-	
-	return;
 }
 
 

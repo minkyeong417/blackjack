@@ -30,7 +30,7 @@ int n_user;									//유저 명수
 
 //play yard information
 int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];	//현재 카드 보유현황 2차원배열 
-int cardSum[N_MAX_USER];					//round별 cardsum. max크기의 1차원배열 
+int cardSum[N_MAX_USER+1]={0,0,0,0,0,0};					//round별 cardsum. max크기의 1차원배열 
 int bet[N_MAX_USER];						//round별 betting 한 금액 
 int gameEnd = 0; 							//game end flag
 
@@ -40,7 +40,6 @@ int gameEnd = 0; 							//game end flag
 
 int main(int argc, char *argv[]) {
 	int roundIndex = 0;
-	int i;
 	
 	srand((unsigned)time(NULL));
 	
@@ -59,7 +58,7 @@ int main(int argc, char *argv[]) {
 		
 		betDollar();//나의 베팅 입력 
 		
-		offerCards(); //카드 나눠주기 & 카드 현황 출력 (딜러는 2번째 카드만) 
+		offerCards(); //카드 나눠주기 & 카드 현황 출력 (딜러는 2번째 카드만) &카드 sum 계 산 
 		
 		printf("\n------------------ GAME start --------------------------\n");
 		
@@ -68,24 +67,29 @@ int main(int argc, char *argv[]) {
 		int i;
 		
 		for (i=0;i<n_users;i++) //each player 플레이어 마다 
-		{	
-			cardSum[i]= //A는 1이나 11, jqk는 10 
-			while (cardSum[i]<21) //do until the player dies or player says stop
-			{	if (i==0)
-					printf("my turn\n");
-			
-				else 
-					printf("player %d turn",i);
+		{
+			if (i==0)
+				printf("my turn\n");
+			else 
+				printf("player %d turn\n",i);
 				
-				printf("card:");
-				printCard(cardhold[i][]);
-				printf(" To go: press 0, To stay: press 1");
-				scanf("%d",action);
-				doAction();
-				//print current card status printUserCardStatus();
-				//check the card status ::: calcStepResult()
-				//GO? STOP? ::: getAction()
-				//check if the turn ends or not
+			calculateCardSum();
+			
+			while (cardSum[i]<21) //do until the player dies or player says stop
+			{	
+				
+				int cardcnt=2;
+				
+				int action;
+				
+				printUserCardStatus(i,cardcnt);
+				
+				printf(" To go: press 0, To stay: press 1 --->");
+	
+				scanf("%d",&action);
+	
+				if (action==0)//to go	
+				cardhold[i][]=pullCard();
 			}
 		}
 		

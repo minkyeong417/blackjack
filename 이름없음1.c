@@ -20,18 +20,4 @@
 
 //card processing functions ---------------
 
-//calculate the actual card number in the blackjack game
-int getCardNum(int cardnum) {
-	int num;
-	num=cardnum%13;
-	
-	if (num<10)
-		return num;
-	else
-		return 10;
-	
-}
-
-}
-
 
