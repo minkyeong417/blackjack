@@ -121,7 +121,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=actionInput.c
+FileName=result.c
 CompileCpp=0
 Folder=
 Compile=1

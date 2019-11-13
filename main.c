@@ -31,8 +31,40 @@ int n_user;									//유저 명수
 //play yard information
 int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];	//현재 카드 보유현황 2차원배열 
 int cardSum[N_MAX_USER+1]={0,0,0,0,0,0};					//round별 cardsum. max크기의 1차원배열 
-int bet[N_MAX_USER];						//round별 betting 한 금액 
+int bet[N_MAX_USER];	//round별 betting 한 금액
+int result[N_MAX_USER+1];	//0 win; 1 lose						 
 int gameEnd = 0; 							//game end flag
+
+//some utility functions
+
+//get an integer input from standard input (keyboard)
+//return : input integer value
+//         (-1 is returned if keyboard input was not integer)
+
+
+int getIntegerInput(void) {
+    int input, num;
+    
+    num = scanf("%d", &input);
+    fflush(stdin);
+    if (num != 1) //if it fails to get integer
+        input = -1;
+    
+    return input;
+}
+
+///////////////function declaration//////////////
+extern void configUser(void);
+extern void mixCardTray();
+extern void betDollar();
+extern void offerCards();
+extern void calculateCardSum();
+extern void printUserCardStatus(int i,int cardcnt);
+extern int pullCard();
+extern void calculateCardSum();
+extern void checkResult();
+extern void checkWinner();
+
 
 /////////////////////////main///////////////////////////
 
@@ -47,9 +79,7 @@ int main(int argc, char *argv[]) {
 
 
 	mixCardTray();//카드 믹스 
-
-
-
+	
 	//Game start --------
 	do {//라운드 진행 
 		printf("Round %d\n",roundIndex+1);//각 라운드마다~ 
@@ -66,7 +96,7 @@ int main(int argc, char *argv[]) {
 		
 		int i;
 		
-		for (i=0;i<n_users;i++) //each player 플레이어 마다 
+		for (i=0;i<n_user+1;i++) //each player 플레이어 마다 
 		{
 			if (i==0)
 				printf("my turn\n");
@@ -79,51 +109,92 @@ int main(int argc, char *argv[]) {
 			
 			int cardcnt=1;
 			
-			switch (i)
+			int action;
 			
-			case 0:{
-				
-				if (cardSum>21)
-				
-				
-				while (cardSum[i]<21){ //do until the player dies or player says stop
-					int action;
-				
-					printUserCardStatus(i,cardcnt);
-				
-					printf(" To go: press 0, To stay: press 1 --->");
-	
-					scanf("%d",&action);
-	
-					if (action==0){//to go	
-						cardcnt++;
-						cardhold[i][cardcnt]=pullCard();
-					}
-				
-					else 
-						break;
-				}
-				break;
-			}
+			switch (i) {
 			
-			default {
-				while (cardSum[i]<21){ //do until the player dies or player says stop
-					printUserCardStatus(i,cardcnt);
+				case 0:{
+						do //do until the player dies or player says stop
+						{ 	if (cardSum[0]<21){
+						
+								printUserCardStatus(i,cardcnt);
+						
+								printf(" To go: press 0, To stay: press 1 --->");
+								
+								scanf("%d",&action);
+	
+								if (action==0){//to go	
+									cardcnt++;
+									cardhold[i][cardcnt]=pullCard();
+									calculateCardSum();
+								}
+				
+								else
+									break;
+							}
+						
+							else if (cardSum[0]==21){
+								printUserCardStatus(i,cardcnt);
+				
+								printf("blackjack\n");
+								result[0]=0; //win
+							}
+						
+							else if (cardSum[0]>21){
+								printUserCardStatus(i,cardcnt);
+				
+								printf("lose to overflow");
+								result[0]=1; //lose
+							}
+						}
+						while (action==0);
 					
-					if (cardSum[i]>=17)//to stop
-						printf("stay\n");
 						break;
-					else
-						cardcnt++;
-						printf("go\n");
-				}
+						}
+					
+					
+				default: {
+					do{ //do until the player dies or player says stop
+					
+						if (cardSum[i]==21){
+							printUserCardStatus(i,cardcnt);
+							printf("blackjack\n");
+							result[i]=0; //win
+						}
+						
+						else if (cardSum[i]<21){
+							
+								printUserCardStatus(i,cardcnt);
+					
+								if (cardSum[i]>=17){ //to stop
+									printf("stay\n");
+									break;
+								}
+						
+								else{
+									cardcnt++;
+									cardhold[i][cardcnt]=pullCard();
+									calculateCardSum();
+									printf("go\n");
+								}
+						}
+						
+					} while (cardSum[i]<=21);
 				
-				break;
+					break;
+				}
 			}
+			
+			
+	
 		}
+		
+		if (cardIndex>N_CARDSET*N_CARD||dollar[i]<=0)
+				gameEnd=1;
 		
 		//result
 		checkResult();
+		
 	} while (gameEnd == 0);//게임끝날때 까 지 
 	
 	checkWinner();//승자출력 

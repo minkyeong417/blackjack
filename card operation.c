@@ -19,9 +19,10 @@
 //card array controllers -----------------------------
 
 extern int CardTray[N_CARDSET*N_CARD]; //1차원 배열 
-extern int cardIndex = 0;		//tray속 n번째 카드	
-
-
+extern int cardIndex;		//tray속 n번째 카드	
+extern int n_user;
+extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];
+extern int cardSum[N_MAX_USER+1];
 
 //get one card from the tray(0~51)
 int pullCard(void) {
@@ -97,10 +98,11 @@ void printCard(int cardnum) {
 
 //calculate the actual card number in the blackjack game
 void calculateCardSum(){
-
+	int i,j;
+	
 	for (i=0;i<n_user+1;i++){
 		for (j=0;j<=N_MAX_CARDHOLD;j++){
-			switch (cardhold([i][j]%13)
+			switch (cardhold[i][j]%13){
 			
 			case 0:
 				{
@@ -108,13 +110,25 @@ void calculateCardSum(){
 					cardSum[i]+=1;
 				else
 					cardSum[i]+=11;
+				break;
 				}
 				
-			case 10,11,12:
+			case 10:
 				cardSum[i]+=10;
+				break;
 			
-			default
-				cardSum[i]+=cardhold([i][j]%13);
+			case 11:
+				cardSum[i]+=10;
+				break;
+				
+			case 12:
+				cardSum[i]+=10;
+				break;
+					
+			default:
+				cardSum[i]+=cardhold[i][j]%13;
+				break;
+			}
 		}
 	}
 }

@@ -15,11 +15,11 @@
 
 #define N_MIN_ENDCARD		30
 
-extern int dollar[N_MAX_USER]={50,50,50,50,50};
+extern int dollar[N_MAX_USER];
 extern int bet[N_MAX_USER];
 extern int n_user;	
 extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];
-extern int cardSum[N_MAX_USER];
+extern int cardSum[N_MAX_USER+1];
 //playing game functions -----------------------------
 
 

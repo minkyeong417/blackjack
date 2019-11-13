@@ -21,7 +21,7 @@ extern int CardTray[N_CARDSET*N_CARD]; //1차원 배열
 extern int n_user;	
 
 //player setting
-int configUser(void) {
+void configUser(void) {
 	
 	printf("input player number(max:5):");
 	scanf("%d",&n_user);
@@ -29,19 +29,21 @@ int configUser(void) {
 }
 
 //mix the card sets and put in the array
-int mixCardTray(void) {
+void mixCardTray(void) {
 	
 	printf("--> card is mixed and put into the tray\n");
 	
 	int i,j;
 	
 	for(i=0;i<N_CARDSET*N_CARD;i++) { //각 배열요소에 대해서 
-
+		
+		int multiply;
+		
+		multiply=1;
+		
 		do {
 	
 			CardTray[i]=rand()%(N_CARDSET*N_CARD);
-	
-			int multiply=1;
 		
 			for(j=0;j<i;j++)
 				multiply*=(CardTray[i]-CardTray[j]);
@@ -49,5 +51,6 @@ int mixCardTray(void) {
 		}
 		while (multiply==0);
 	}
+	
 }
 
