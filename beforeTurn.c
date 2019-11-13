@@ -34,7 +34,7 @@ void betDollar(void) {
 	for (i=1;i<n_user;i++){
 	
 		bet[i]=1+rand()%N_MAX_BET;
-		printf("player%d bets $%d (out of %d)\n",i,bet[i],dollar[i]);
+		printf("player%d bets $%d (out of %d)\n\n",i,bet[i],dollar[i]);
 	}
 	
 	int j;
@@ -46,7 +46,7 @@ void betDollar(void) {
 //offering initial 2 cards
 void offerCards(void) {
 	
-	printf("card offering:\n");
+	printf("card offering>>\n");
 	
 	//1. give two cards
 	
@@ -66,12 +66,14 @@ void offerCards(void) {
 		
 	printf("you:");
 	printCard(cardhold[0][0]);
+	printf(" ");
 	printCard(cardhold[0][1]);
 	printf("\n");
 	
 	for (i=1;i<n_user;i++){
 		printf("player %d:",i);
 		printCard(cardhold[i][0]);
+		printf(" ");
 		printCard(cardhold[i][1]);
 		printf("\n");
 	}

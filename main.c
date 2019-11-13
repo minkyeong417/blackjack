@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
 	
 	//Game start --------
 	do {//라운드 진행 
-		printf("Round %d\n",roundIndex+1);//각 라운드마다~ 
+		printf("Round %d>>\n",roundIndex+1);//각 라운드마다~ 
 		
 		roundIndex++;
 		

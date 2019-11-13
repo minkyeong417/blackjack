@@ -31,26 +31,27 @@ void configUser(void) {
 //mix the card sets and put in the array
 void mixCardTray(void) {
 	
-	printf("--> card is mixed and put into the tray\n");
+	printf("--> card is mixed and put into the tray\n\n");
 	
 	int i,j;
 	
-	for(i=0;i<N_CARDSET*N_CARD;i++) { //각 배열요소에 대해서 
-		
-		int multiply;
-		
-		multiply=1;
-		
-		do {
-	
+	int multiply;
+	for (i=0;i<(N_CARDSET*N_CARD);i++)
+	{
+		do{
+			multiply=1;
 			CardTray[i]=rand()%(N_CARDSET*N_CARD);
-		
-			for(j=0;j<i;j++)
+			for(j=0;j<i;j++){
 				multiply*=(CardTray[i]-CardTray[j]);
-
-		}
-		while (multiply==0);
+			}
+		
+		} while(multiply==0);
+		
+		printf("%d %d\n",i,CardTray[i]);
 	}
 	
 }
+	
+	
+
 
