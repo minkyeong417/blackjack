@@ -14,26 +14,24 @@
 
 #define N_MIN_ENDCARD		30
 
-//함수는 다른파일에 저장
-//변수이름은 의미를 알도록 정의 
+ 
 //card tray object
-//형상관리에 몇번 올리기 
-//card tray object
-int CardTray[N_CARDSET*N_CARD]; //1차원 배열 
-int cardIndex = 0;		//tray속 n번째 카드					
+
+int CardTray[N_CARDSET*N_CARD]; 
+int cardIndex = 0;					
 
 
 //player info
-int dollar[N_MAX_USER]={50,50,50,50,50};						//달러 보유 현황 
-int n_user;									//유저 명수 
+int dollar[N_MAX_USER]={50,50,50,50,50};						
+int n_user;									//scanf
 
 
 //play yard information
-int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];	//현재 카드 보유현황 2차원배열 
-int cardSum[N_MAX_USER+1]={0,0,0,0,0,0};					//round별 cardsum. max크기의 1차원배열 
-int bet[N_MAX_USER];	//round별 betting 한 금액
+int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];	//
+int cardSum[N_MAX_USER+1]={0,0,0,0,0,0};					//cardsum. for each round
+int bet[N_MAX_USER];	//betting for each round 
 int result[N_MAX_USER+1];	//0 win; 1 lose						 
-int gameEnd = 0; 							//game end flag
+int gameEnd = 0; 		
 
 //some utility functions
 
@@ -75,28 +73,28 @@ int main(int argc, char *argv[]) {
 	
 	srand((unsigned)time(NULL));
 	
-	configUser();//플레이어 세트 
+	configUser();//player setting
 
 
-	mixCardTray();//카드 믹스 
+	mixCardTray();//
 	
 	//Game start --------
-	do {//라운드 진행 
-		printf("Round %d>>\n",roundIndex+1);//각 라운드마다~ 
+	do {//for each round 
+		printf("Round %d>>\n",roundIndex+1);//for each round 
 		
 		roundIndex++;
 		
-		betDollar();//나의 베팅 입력 
+		betDollar();//betting scanf
 		
-		offerCards(); //카드 나눠주기 & 카드 현황 출력 (딜러는 2번째 카드만) &카드 sum 계 산 
+		offerCards(); //offer card & printpresentcardinformaiton / card sum calculate 
 		
 		printf("\n------------------ GAME start --------------------------\n");
 		
-		//player 마다 turn 시작 
+		//turn start for each player
 		
 		int i;
 		
-		for (i=0;i<n_user+1;i++) //each player 플레이어 마다 
+		for (i=0;i<n_user+1;i++) //for each player 
 		{
 			if (i==0)
 				printf("my turn\n");
@@ -193,11 +191,11 @@ int main(int argc, char *argv[]) {
 				gameEnd=1;
 		
 		//result
-		checkResult();
+		checkResult();//round result
 		
-	} while (gameEnd == 0);//게임끝날때 까 지 
+	} while (gameEnd == 0);// 
 	
-	checkWinner();//승자출력 
+	checkWinner();//game result / print winner
 	
 	
 	return 0;

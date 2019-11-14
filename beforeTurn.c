@@ -20,8 +20,8 @@ extern int bet[N_MAX_USER];
 extern int n_user;	
 extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];
 extern int cardSum[N_MAX_USER+1];
-//playing game functions -----------------------------
 
+//before turn start
 
 //betting
 void betDollar(void) {
@@ -51,10 +51,11 @@ void offerCards(void) {
 	//1. give two cards
 	
 	int i,j;
-	
-	for (j=0;j<2;j++){
-		for (i=0;i<n_user+1;i++)
+
+	for (i=0;i<n_user+1;i++){
+		for (j=0;j<2;j++){
 		cardhold[i][j] = pullCard();
+		}
 	}
 	
 	//2. print card state

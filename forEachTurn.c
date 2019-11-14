@@ -16,7 +16,8 @@
 
 extern int roundIndex;
 extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];
-//°¢ turn¸¶´Ù 
+
+//for each turn
 
 
 void printUserCardStatus(int user, int cardcnt) {

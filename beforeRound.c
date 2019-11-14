@@ -14,9 +14,9 @@
 
 #define N_MIN_ENDCARD		30
 
-extern int CardTray[N_CARDSET*N_CARD]; //1차원 배열 
+extern int CardTray[N_CARDSET*N_CARD];
 
-//라운드 돌기 전 
+//before round start
 
 extern int n_user;	
 
@@ -35,19 +35,17 @@ void mixCardTray(void) {
 	
 	int i,j;
 	
-	int multiply;
 	for (i=0;i<(N_CARDSET*N_CARD);i++)
 	{
-		do{
-			multiply=1;
-			CardTray[i]=rand()%(N_CARDSET*N_CARD);
+		CardTray[i]=rand()%(N_CARDSET*N_CARD);
+		
+		if (i!=0){
 			for(j=0;j<i;j++){
-				multiply*=(CardTray[i]-CardTray[j]);
+				if(CardTray[i]==CardTray[j])
+				i--;
 			}
 		
-		} while(multiply==0);
-		
-		printf("%d %d\n",i,CardTray[i]);
+		}
 	}
 	
 }

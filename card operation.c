@@ -1,5 +1,3 @@
-// !!전역변수 호출하 기 
-
 #include <stdio.h>
 #include <stdlib.h>
 
