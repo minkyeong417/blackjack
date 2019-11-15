@@ -15,11 +15,14 @@
 
 #define N_MIN_ENDCARD		30
 
-extern int dollar[N_MAX_USER];
+extern int dollar[N_MAX_USER+1];
 extern int bet[N_MAX_USER];
 extern int n_user;	
 extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];
 extern int cardSum[N_MAX_USER+1];
+extern int cardIndex;
+extern int pullCard(); 
+extern int cardcnt[N_MAX_USER];
 
 //before turn start
 
@@ -39,8 +42,6 @@ void betDollar(void) {
 	
 	int j;
 	
-	for (j=0;j<n_user;j++)
-		dollar[j]-=bet[j];
 }
 
 //offering initial 2 cards
@@ -78,6 +79,10 @@ void offerCards(void) {
 		printCard(cardhold[i][1]);
 		printf("\n");
 	}
+	
+	for (i=0;i<n_user+1;i++)
+		cardcnt[i]+=2;
+		
 }
 
 

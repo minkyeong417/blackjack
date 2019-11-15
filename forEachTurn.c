@@ -16,6 +16,7 @@
 
 extern int roundIndex;
 extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];
+extern int cardcnt[N_MAX_USER+1];
 
 //for each turn
 
@@ -25,8 +26,12 @@ void printUserCardStatus(int user, int cardcnt) {
 	
 	printf("   -> card : ");
 	
-	for (i=0;i<cardcnt+1;i++)
+	for (i=0;i<cardcnt;i++){
 		printCard(cardhold[user][i]);
+		printf(" ");
+		
+	}
+		
 	printf(" ::: ");
 }
 

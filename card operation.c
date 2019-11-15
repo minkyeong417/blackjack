@@ -21,11 +21,12 @@ extern int cardIndex;		//tray속 n번째 카드
 extern int n_user;
 extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];
 extern int cardSum[N_MAX_USER+1];
-
+extern int cardcnt[N_MAX_USER+1];
 //get one card from the tray(0~51)
 int pullCard(void) {
-	return CardTray[cardIndex]%52;
 	cardIndex++;
+	return CardTray[cardIndex]%52;
+	
 }
 
 //print the card information (e.g. DiaA)
@@ -99,47 +100,35 @@ void calculateCardSum(){
 	int i,j;
 	
 	for (i=0;i<n_user+1;i++){
-		for (j=0;j<=N_MAX_CARDHOLD;j++){
+		cardSum[i]=0;
+		for (j=0;j<cardcnt[i];j++){
 			switch (cardhold[i][j]%13){
 			
 			case 0:
 				{
-				if ((cardSum[i]+=11)>21)
+				if ((cardSum[i]+11)>21)
 					cardSum[i]+=1;
 				else
 					cardSum[i]+=11;
-				break;
 				}
+				break;
+				
 				
 			case 10:
-				cardSum[i]+=10;
-				break;
-			
 			case 11:
-				cardSum[i]+=10;
-				break;
-				
 			case 12:
 				cardSum[i]+=10;
 				break;
 					
 			default:
-				cardSum[i]+=cardhold[i][j]%13;
+				cardSum[i]+=(1+cardhold[i][j]%13);
 				break;
 			}
 		}
 	}
 }
 
-int getCardNum(int cardnum) {
-	
-	int num;
-	
-	num=cardnum%13;
-	
-	if (num<10)
-		return num;
-	else
-		return 10;
-	}
+void printSum(int i){
+		printf("[Sum: %d] ",cardSum[i]);
+}
 
