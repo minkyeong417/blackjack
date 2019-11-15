@@ -35,7 +35,8 @@ void checkResult(){
 		if (cardSum[i]==21){
 		
 			result[i]=0;
-			dollar[i]+=bet[i];
+			dollar[i]+=(bet[i]*2);
+			printf("blackjack\n");
 		}
 		else if (cardSum[i]>21){
 			result[i]=1;
