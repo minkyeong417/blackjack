@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#define N_CARDSET			1
+#define N_CARDSET			4
 #define N_CARD				52
 #define N_DOLLAR			50
 
@@ -13,11 +12,10 @@
 #define N_MAX_BET			5
 
 #define N_MIN_ENDCARD		30
-
 //card array controllers -----------------------------
 
-extern int CardTray[N_CARDSET*N_CARD]; //1차원 배열 
-extern int cardIndex;		//tray속 n번째 카드	
+extern int CardTray[N_CARDSET*N_CARD]; //
+extern int cardIndex;		//
 extern int n_user;
 extern int cardhold[N_MAX_USER+1][N_MAX_CARDHOLD];
 extern int cardSum[N_MAX_USER+1];

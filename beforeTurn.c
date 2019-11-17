@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N_CARDSET			1
+#define N_CARDSET			4
 #define N_CARD				52
 #define N_DOLLAR			50
 
@@ -37,7 +37,7 @@ void betDollar(void) {
 	for (i=1;i<n_user;i++){
 	
 		bet[i]=1+rand()%N_MAX_BET;
-		printf("player%d bets $%d (out of %d)\n\n",i,bet[i],dollar[i]);
+		printf("\nplayer%d bets $%d (out of %d)\n\n",i,bet[i],dollar[i]);
 	}
 	
 	int j;
