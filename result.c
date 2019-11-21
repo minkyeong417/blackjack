@@ -16,14 +16,13 @@
 #define N_MIN_ENDCARD		30
 
 extern int cardSum[N_MAX_USER+1];	
-extern int result[N_MAX_USER+1];//0 win; 1 lose
+extern int result[N_MAX_USER+1];//1 lose to overflow; 2 blackjack;
 extern int dollar[N_MAX_USER+1];
 extern int CardTray[N_CARDSET*N_CARD];
 extern int n_user;
 extern int bet[];
 
 void checkResult(){
-	int result[N_MAX_USER];//0 lose; 1 win; 2 blackjack;
 	int i;
 	
 	for(i=0;i<n_user;i++){
@@ -32,16 +31,28 @@ void checkResult(){
 		else
 		printf("your result: ");
 		
-		if (cardSum[i]==21)
+		if (result[i]==2)
 		
 			printf("blackjack\n");
 		
-		else if (cardSum[i]>21)
+		else if (result[i]==1)
 		
 			printf("lose due to overflow\n");
 		
-		else if (cardSum[i]<21){
-			if (cardSum[n_user]<21){
+		else {
+			
+			if (result[n_user]==2) {
+				dollar[i]-=bet[i];
+				printf("lose\n");
+				
+			}
+			
+			else if (result[n_user]==1){
+				printf("win\n");
+				dollar[i]+=bet[i];
+				
+			}
+			else {
 				if (cardSum[i]<cardSum[n_user]){
 					dollar[i]-=bet[i];
 					printf("lose\n");
@@ -53,17 +64,7 @@ void checkResult(){
 				}	
 			}
 			
-			else if (cardSum[n_user]==21){
-				dollar[i]-=bet[i];
-				printf("lose\n");
-
-			}
-			
-			else if (cardSum[n_user]>21){
-				printf("win\n");
-				dollar[i]+=bet[i];
-			}
-			
+		
 		}
 		
 		printf("[Sum:%d]",cardSum[i]);

@@ -123,8 +123,19 @@ int main(int argc, char *argv[]) {
 			switch (i) {
 			
 				case 0:{ //my turn
+					if (cardSum[i]==21){
+						printUserCardStatus(i,cardcnt[i]);
+								printSum(i);
+								printf("blackjack");
+								result[0]=2; //blackjack
+								dollar[i]+=(bet[i]*2);
+								printf(" (current dollar state:$%d)\n\n",dollar[i]);
+								
+					}
+					else {
+
 						do //do until the player dies or player says stop
-						{ 	if (cardSum[0]<21){
+						{ 	if (cardSum[0]<=21){
 						
 								printUserCardStatus(i,cardcnt[i]);
 								printSum(i);
@@ -142,21 +153,11 @@ int main(int argc, char *argv[]) {
 									break;
 							}
 						
-							else if (cardSum[0]==21){
-								printUserCardStatus(i,cardcnt[i]);
-								printSum(i);
-								printf("blackjack");
-								result[0]=2; //blackjack
-								dollar[i]+=(bet[i]*2);
-								printf(" (current dollar state:$%d)\n\n",dollar[i]);
-								break;
-							}
-						
 							else if (cardSum[0]>21){
 								printUserCardStatus(i,cardcnt[i]);
 								printSum(i);
 								printf("lose to overflow");
-								result[0]=0; //lose
+								result[0]=1; //lose to overflow
 								dollar[i]-=(bet[i]);
 								printf(" (current dollar state:$%d)\n\n",dollar[i]);
 								break;
@@ -164,31 +165,13 @@ int main(int argc, char *argv[]) {
 						
 						}
 						while (action==0);
-						
+					}
 				}
 					break;
 					
 					
 				default: { //others' turn
-					while (cardSum[i]<17)//do until the player dies or player says stop
-					{
-						printUserCardStatus(i,cardcnt[i]);				
-						printSum(i);
-						cardhold[i][cardcnt[i]]=pullCard();
-						cardcnt[i]++;
-						calculateCardSum();
-						printf("go\n");
-						
-					}
-						
-					
-					if (cardSum[i]<21){ //to stop
-						printUserCardStatus(i,cardcnt[i]);
-						printSum(i);
-						printf("stay\n\n");
-
-					}
-							
+				
 					if (cardSum[i]==21){
 							printUserCardStatus(i,cardcnt[i]);
 							printSum(i);
@@ -200,19 +183,43 @@ int main(int argc, char *argv[]) {
 							else
 								printf("\n\n");
 					}
+					
+					else {
+					
+						while (cardSum[i]<17)//do until the player dies or player says stop
+						{
+							printUserCardStatus(i,cardcnt[i]);				
+							printSum(i);
+							cardhold[i][cardcnt[i]]=pullCard();
+							cardcnt[i]++;
+							calculateCardSum();
+							printf("go\n");
+							
+						}
+							
 						
-					if (cardSum[i]>21){
+						if (cardSum[i]<=21){ //to stop
 							printUserCardStatus(i,cardcnt[i]);
 							printSum(i);
-							printf("lose to overflow");
-							result[i]=0;//lose
-							dollar[i]-=(bet[i]);
-							if (i!=n_user)
-								printf(" (current dollar state:$%d)\n\n",dollar[i]);
-							else
-								printf("\n\n");
+							printf("stay\n\n");
+	
+						}
+								
+						
+							
+						else if (cardSum[i]>21){
+								printUserCardStatus(i,cardcnt[i]);
+								printSum(i);
+								printf("lose to overflow");
+								result[i]=1;//lose to overflow
+								dollar[i]-=(bet[i]);
+								if (i!=n_user)
+									printf(" (current dollar state:$%d)\n\n",dollar[i]);
+								else
+									printf("\n\n");
+						}
+						
 					}
-					
 				}
 				break;
 			}
@@ -231,6 +238,10 @@ int main(int argc, char *argv[]) {
 			gameEnd=1;
 			
 		printf("\n\n\n\n\n\n");
+		
+		for (i=0;i<=n_user;i++){
+			result[i]=0;
+		}
 	} while (gameEnd == 0);// 
 	
 	checkWinner();//game result / print winner
